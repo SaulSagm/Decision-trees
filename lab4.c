@@ -211,28 +211,21 @@ int main()
         }
         
         for(i=0;i<3;i++)
-        {
-            subtot=subtot+gain[i].v;
-            printf("%.4f\n",gain[i].v);
-            printf("%.4f\n",gain[i].inf1);
-            printf("%.4f\n",gain[i].inf2);
-            printf("%.4f\n\n",gain[i].inf3);
-        }
+            subtot=subtot+gain[i].v;    //Calculate subtot or v
         
         for(i=0;i<3;i++)
-        {
+        {                   //Sum of the different entropies
             tot=gain[i].inf1+gain[i].inf2+gain[i].inf3;
             sum=sum-(gain[i].v/subtot)*entropy(tot,gain[i].inf1,gain[i].inf2,gain[i].inf3);
         }
-        //printf("%.4f\n",sum);
+
         if(l!=(n_cond-1))
         {
             node[l].val=ent_raiz+sum;
-            strcpy(node[l].name,cond[l].name);
-            //printf("%s %.4f\n",node[l].name,node[l].val);
-        }
+            strcpy(node[l].name,cond[l].name);  
+        }                                       
         sum=0;
-        for(i=0;i<3;i++)
+        for(i=0;i<3;i++)    //Reset of values
         {
             gain[i].v=0;
             gain[i].inf1=0;
@@ -247,28 +240,9 @@ int main()
     
     for(i=0;i<l;i++)
     {
-        if(node[i].val>=node[i+1].val&&(i+1)!=l)
-            strcpy(raiz,node[i].name);
+        if(node[i].val>=node[i+1].val&&(i+1)!=l)    //Choosing the highes node 
+            strcpy(raiz,node[i].name);              //with better entropy
     }
-    
-    printf("Raiz %s\n",raiz);
-    
-    /*for(i=0;i<n_cond;i++)
-    {
-        printf("%s\n",cond[i].name);
-        printf("%s\n",cond[i].path1);
-        printf("%s\n",cond[i].path2);
-        printf("%i\n",cond[i].num_paths);
-        printf("%i\n",cond[i].stage);
-    }
-    printf("\n");
-    for(i=0;i<n_dataSet;i++)
-        printf("%s\n",dataSet[i].Set);*/
-    
-    /*for(i=0;i<n_Set;i++)
-        printf("%s\n",singleData[i].singleSet);*/
-
-    //Raiz
     
     return 0;
 }
